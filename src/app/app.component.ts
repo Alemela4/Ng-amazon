@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ProductListComponent } from "./components/product-list/product-list.component";
+import { SearchBarComponent } from "./components/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ProductListComponent, SearchBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
