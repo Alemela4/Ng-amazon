@@ -1,0 +1,8 @@
+<div class="btn-group mb-2" role="group">
+  <button type="button" class="btn btn-outline-secondary">Tutte</button>
+  @for (c of categories; track $index) {
+  <button type="button" class="btn btn-outline-secondary">
+    {{ c.name }}
+  </button>
+  }
+</div>
