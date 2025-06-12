@@ -1,5 +1,6 @@
-<div class="container p-4">
-  <app-search-bar></app-search-bar>
+<app-header></app-header>
+<div class="container p-4 d-flex gap-2">
   <app-category-buttons></app-category-buttons>
-  <app-product-list></app-product-list>
+  <router-outlet></router-outlet>
+  <!-- router-outlet è il div che contiene le parti che cambieranno in base al routing (se cambia la route) -->
 </div>

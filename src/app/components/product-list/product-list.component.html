@@ -2,5 +2,7 @@
     {{ products | json }}
 </pre> -->
 @for (p of filteredProducts(); track $index) {
-<div>{{ p.title }}</div>
+<div>
+  <a [routerLink]="['/', 'prodotti', p.id]">{{ p.title }}</a>
+</div>
 }

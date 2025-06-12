@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ProductsResponse } from '../models/product';
+import { Product, ProductsResponse } from '../models/product';
 import { Category } from '../models/category';
 
 @Injectable({
@@ -14,6 +14,13 @@ export class ProductsService {
     // metodo asincrono per ottenere i prodotti. Mi torna una Promise, cioè un oggetto che rappresenta un valore che potrebbe essere disponibile ora, o in futuro, o mai.
     const response = await fetch('https://dummyjson.com/products'); // chiamata API per ottenere i prodotti
     const data: ProductsResponse = await response.json(); // converte la risposta in formato JSON
+    return data; // restituisce i prodotti in formato JSON
+  }
+
+  async getProductById(id: string) {
+    // metodo asincrono per ottenere un prodotto per ID
+    const response = await fetch(`https://dummyjson.com/products/${id}`); // chiamata API per ottenere il prodotto per ID
+    const data: Product = await response.json(); // converte la risposta in formato JSON
     return data; // restituisce i prodotti in formato JSON
   }
 
