@@ -3,6 +3,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { HomeComponent } from './components/home/home.component';
 import { ContattiComponent } from './components/contatti/contatti.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { PostAddComponent } from './components/post-add/post-add.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'prodotti/:id',
     component: ProductDetailComponent,
+  },
+  {
+    path: 'nuovo-post',
+    component: PostAddComponent,
   },
 ];

@@ -3,6 +3,7 @@ import { Product, ProductsResponse } from '../models/product';
 import { Category } from '../models/category';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { NuovoPost } from '../models/post';
 
 @Injectable({
   providedIn: 'root',
@@ -52,4 +53,6 @@ export class ProductsService {
     console.log('NUOVA RICERCA:' + r);
     this.ricerca = r; // aggiorna la stringa di ricerca con il valore passato come parametro
   }
+
+  addPost(post: NuovoPost) {}
 }

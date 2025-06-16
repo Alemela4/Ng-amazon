@@ -1,0 +1,42 @@
+<form (ngSubmit)="aggiungiPost()" #laForm="ngForm">
+  <!-- #laForm="ngForm" serve per creare una variabile locale che contiene il form, in modo da poterlo utilizzare per la validazione e l'invio del form -->
+  <!-- utilizzo il metodo aggiungiPost() per salvare il post. Uso (ngSubmit) per fare in modo che il form sia inviato al metodo aggiungiPost() quando viene inviato il pulsante "Salva" -->
+  <div class="mb-3">
+    <label for="title" class="form-label">Titolo</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="model.title"
+      name="title"
+      id="title"
+      required
+      #inputTitle="ngModel"
+      [ngClass]="{ 'is-invalid': inputTitle.invalid && inputTitle.dirty }"
+    />
+    @if (inputTitle.invalid && inputTitle.dirty) {
+    <div style="color: red">Titolo obbligatorio</div>
+    }
+    <!-- il required serve per rendere il campo obbligatorio -->
+  </div>
+  <div class="mb-3">
+    <label for="body" class="form-label">Testo</label>
+    <textarea
+      class="form-control"
+      [(ngModel)]="model.body"
+      name="body"
+      id="body"
+      #inputBody="ngModel"
+      required
+      minlength="3"
+    ></textarea>
+    @if (inputBody.invalid) {
+    <div style="color: red">testo obbligatorio</div>
+    }
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!laForm.valid">
+    Salva
+  </button>
+  <!-- il pulsante Salva è disabilitato se il form non è valido, grazie a [disabled]="!laForm.valid" -->
+</form>
+<!-- <pre>{{ laForm.valid }}</pre> -->
+<!-- per vedere se il form è valido o meno, se è valido, la variabile laForm.valid è true -->
