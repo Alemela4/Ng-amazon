@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { Product } from '../../models/product';
+import { Product, ProductsResponse } from '../../models/product';
 import { RouterModule } from '@angular/router';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -15,10 +16,36 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
   ngOnInit(): void {
+    // this.productsService
+    //   .getProducts() // metodo asincrono per ottenere i prodotti
+    //   .then((r) => (this.products = r.products))
+    //   .catch((err) => console.log('ERRORE NEL RECUPERO DEI PRODOTTI'));
+
     this.productsService
-      .getProducts() // metodo asincrono per ottenere i prodotti
-      .then((r) => (this.products = r.products))
-      .catch((err) => console.log('ERRORE NEL RECUPERO DEI PRODOTTI'));
+      .getProductsObservable()
+      .pipe(
+        catchError((err) => {
+          console.log('ERRORE NEL RECUPERO DEI PRODOTTI', err);
+          const valoreErrore: ProductsResponse = {
+            products: [],
+            total: 0,
+            skip: 0,
+            limit: 0,
+          }; // crea un oggetto ProductsResponse vuoto in caso di errore
+          return of(valoreErrore); // ritorna un Observable che emette l'oggetto vuoto
+          // of() è un operatore che crea un Observable che emette i valori passati come argomento
+        })
+      )
+      .subscribe((r) => (this.products = r.products)); // utilizza il metodo getProductsObservable() del servizio ProductsService per ottenere i prodotti e si iscrive all'Observable per ricevere gli aggiornamenti
+
+    // .getProductsObservable()
+    // .pipe(
+    //   catchError(err => {
+    //    console.log("ERRORE NEL RECUPERO DEI PRODOTTI", err);
+    //    return of(undefined);
+    //   })
+    // )
+    // .subscribe(r => this.products = r != undefined ? r.products : []);
   }
 
   filteredProducts() {
